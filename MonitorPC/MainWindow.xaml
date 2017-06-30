@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:MonitorPC"
         mc:Ignorable="d"
         Title="MonitorPC" Height="350" Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ThemeDefault.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         
     </Grid>
