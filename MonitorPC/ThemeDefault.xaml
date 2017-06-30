@@ -8,7 +8,7 @@
         <Setter Property="Background" Value="LightGray" />
         <!--<Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />-->
-        <Setter Property="MinWidth" Value="35" />
+        <Setter Property="MinWidth" Value="25" />
         <Setter Property="Margin" Value="2"/>
     </Style>
     <Style TargetType="{x:Type StackPanel}">

@@ -97,5 +97,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibMonitorPC\LibMonitorPC.csproj">
+      <Project>{8D30B183-3E6F-47AB-B66A-AFCDCE2F685D}</Project>
+      <Name>LibMonitorPC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

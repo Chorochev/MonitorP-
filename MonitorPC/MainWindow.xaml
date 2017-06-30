@@ -14,6 +14,25 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="55" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Процессор:" />
+                <TextBox Text="{Binding Path=CPUInfo.Name}" IsReadOnly="True" />
+                <TextBlock Text="кол. ядер. = "/>
+                <TextBox Text="{Binding Path=CPUInfo.NumberOfCores}" IsReadOnly="True" />
+                <TextBlock Text="кол. лог. = "/>
+                <TextBox Text="{Binding Path=CPUInfo.NumberOfLogicalProcessors}" IsReadOnly="True" />
+            </StackPanel>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}" />
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibMonitorPC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,23 @@ namespace MonitorPC
     /// </summary>
     public partial class MainWindow : Window
     {
+        private BindingDataForm bindingDataForm;
+
         public MainWindow()
         {
             InitializeComponent();
+            loadDataStart();
+        }
+
+        private void loadDataStart()
+        {
+            bindingDataForm = new BindingDataForm();
+            DataContext = bindingDataForm;
+            Task.Run(() => 
+            {
+                bindingDataForm.CPUInfo.GetProcessorInfo();
+            });
+
         }
     }
 }
