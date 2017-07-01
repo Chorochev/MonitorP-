@@ -11,6 +11,26 @@ namespace LibMonitorPC
     /// </summary>
     public class CPUInfo : BaseInfo
     {
+        #region DeviceID
+        private string _deviceID;
+        /// <summary>
+        /// Идентификатор процессора
+        /// </summary>
+        public string DeviceID
+        {
+            get { return _deviceID; }
+            private set
+            {
+                string newValue = value;
+                if(_deviceID != newValue)
+                {
+                    _deviceID = newValue;
+                    NotifyChanged("DeviceID");
+                }
+            }
+        }
+        #endregion
+
         #region NumberOfCores
         private int _numberOfCores;
         /// <summary>
@@ -19,7 +39,7 @@ namespace LibMonitorPC
         public int NumberOfCores
         {
             get { return _numberOfCores; }
-            set
+            private set
             {
                 int newValue = value;
                 if (_numberOfCores != newValue)
@@ -39,7 +59,7 @@ namespace LibMonitorPC
         public int NumberOfLogicalProcessors
         {
             get { return _numberOfLogicalProcessors; }
-            set
+            private set
             {
                 int newValue = value;
                 if (_numberOfLogicalProcessors != newValue)
@@ -59,7 +79,7 @@ namespace LibMonitorPC
         public string Name
         {
             get { return _name; }
-            set
+            private set
             {
                 string newValue = value;
                 if (_name != newValue)
@@ -73,14 +93,18 @@ namespace LibMonitorPC
 
         #region GetProcessorInfo
         /// <summary>
-        /// Получение количества процессоров
+        /// Получение информации о процессоре
         /// </summary>
-        public void GetProcessorInfo()
+        public void GetProcessorInfo(string deviceID = null)
         {
             ExecuteQuery();
-            NumberOfCores = GetValueFirst<int>("NumberOfCores");
-            NumberOfLogicalProcessors = GetValueFirst<int>("NumberOfLogicalProcessors");
-            Name = GetValueFirst<string>("Name");
+            if (string.IsNullOrWhiteSpace(deviceID))
+            {
+                NumberOfCores = GetValueFirst<int>("NumberOfCores");
+                NumberOfLogicalProcessors = GetValueFirst<int>("NumberOfLogicalProcessors");
+                Name = GetValueFirst<string>("Name");
+                DeviceID = GetValueFirst<string>("DeviceID");
+            }
         }
         #endregion
 
@@ -90,6 +114,7 @@ namespace LibMonitorPC
             this._numberOfCores = 0;
             this._numberOfLogicalProcessors = 0;
             this._name = string.Empty;
+            this._deviceID = string.Empty;
         }
         #endregion        
     }

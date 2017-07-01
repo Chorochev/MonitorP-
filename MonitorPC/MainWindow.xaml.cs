@@ -33,10 +33,11 @@ namespace MonitorPC
         {
             bindingDataForm = new BindingDataForm();
             DataContext = bindingDataForm;
-            Task.Run(() => 
+            Task.Run(() =>
             {
                 bindingDataForm.CPUInfo.GetProcessorInfo();
             });
+
 
         }
     }

@@ -29,6 +29,7 @@ namespace LibMonitorPC
             {
                 resultQuery = null;
                 resultQuery = new ManagementObjectSearcher(scope, queryString);
+                QueryResultFirst();
             }
             catch (Exception e)
             {
@@ -42,12 +43,46 @@ namespace LibMonitorPC
         /// <param name="name">наименование значения</param>
         /// <returns></returns>
         protected T GetValueFirst<T>(string name)
-        {
-            QueryResultFirst();
+        {           
             if (ManagementObjectFirst != null)
                 return GetValue<T>(ManagementObjectFirst, name);
             else
                 return default(T);
+        }
+        /// <summary>
+        /// Получение значение из определенного результата запроса
+        /// </summary>
+        /// <typeparam name="T">тип значения</typeparam>
+        /// <param name="resultId">наименование идентификатора по которому определяется конкретный результат</param>
+        /// <param name="resultValue">значение идентификатора по которому определяется конкретный результат</param>
+        /// <param name="name">наименование значения</param>
+        /// <returns></returns>
+        protected T GetValue<T>(string resultId, string resultValue, string name)
+        {
+            if (resultQuery != null)
+            {
+                foreach (ManagementObject queryObj in resultQuery.Get())
+                {
+                    if((string)queryObj[resultId] == resultValue)
+                    {
+                        return GetValue<T>(queryObj, name);
+                    }
+                }
+            }
+            return default(T);
+        }
+
+        /// <summary>
+        /// Количество результатов запроса
+        /// </summary>
+        /// <returns></returns>
+        protected int QueryResulCount()
+        {
+            if (resultQuery != null)
+            {
+                return resultQuery.Get().Count;
+            }
+            return 0;
         }
         #endregion
 
@@ -89,7 +124,7 @@ namespace LibMonitorPC
             return default(T);
         }
         #endregion
-         
+
         #region Конструктор
         public BaseInfo(string scope, string queryString)
         {

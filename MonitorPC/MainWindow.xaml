@@ -26,11 +26,11 @@
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Процессор:" />
-                <TextBox Text="{Binding Path=CPUInfo.Name}" IsReadOnly="True" />
+                <TextBox Text="{Binding Path=CPUInfo.Name, Mode=OneWay}" IsReadOnly="True" />
                 <TextBlock Text="кол. ядер. = "/>
-                <TextBox Text="{Binding Path=CPUInfo.NumberOfCores}" IsReadOnly="True" />
+                <TextBox Text="{Binding Path=CPUInfo.NumberOfCores, Mode=OneWay}" IsReadOnly="True" />
                 <TextBlock Text="кол. лог. = "/>
-                <TextBox Text="{Binding Path=CPUInfo.NumberOfLogicalProcessors}" IsReadOnly="True" />
+                <TextBox Text="{Binding Path=CPUInfo.NumberOfLogicalProcessors, Mode=OneWay}" IsReadOnly="True" />
             </StackPanel>
         </StackPanel>
         <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}" />
