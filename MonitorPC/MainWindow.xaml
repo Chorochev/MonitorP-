@@ -25,10 +25,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" IsEnabled="False" Background="LightGray">
-            <ListBox ItemsSource="{Binding Path=ListCPU}" ItemTemplate="{DynamicResource StackPanelForCPU}" />
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Background="LightGray">
+            <ListBox ItemsSource="{Binding Path=ListCPU}" ItemTemplate="{DynamicResource StackPanelForCPU}" Background="LightGray" />
         </StackPanel>
         
-        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}" IsEnabled="False" />
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}"
+                 Background="LightGray" IsEnabled="False" />
     </Grid>
 </Window>

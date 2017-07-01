@@ -4,11 +4,11 @@
                     xmlns:local="clr-namespace:MonitorPC">
     <DataTemplate x:Key="StackPanelForCPU" DataType="{x:Type libPc:CPUInfo}">
         <StackPanel Orientation="Horizontal" Background="LightGray">
-            <TextBlock Text="Процессор:" />
+            <TextBox Text="{Binding Path=DeviceID, Mode=OneWay}" IsReadOnly="True" />
             <TextBox Text="{Binding Path=Name, Mode=OneWay}" IsReadOnly="True" />
-            <TextBlock Text="кол. ядер. = "/>
+            <TextBox Text="Cores" IsReadOnly="True" />
             <TextBox Text="{Binding Path=NumberOfCores, Mode=OneWay}" IsReadOnly="True" />
-            <TextBlock Text="кол. лог. = "/>
+            <TextBox Text="LogCores" IsReadOnly="True" />
             <TextBox Text="{Binding Path=NumberOfLogicalProcessors, Mode=OneWay}" IsReadOnly="True" />
         </StackPanel>
     </DataTemplate>
