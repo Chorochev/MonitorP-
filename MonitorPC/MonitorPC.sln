@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorPC", "MonitorPC.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibMonitorPC", "..\LibMonitorPC\LibMonitorPC.csproj", "{8D30B183-3E6F-47AB-B66A-AFCDCE2F685D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "..\ConsoleTest\ConsoleTest.csproj", "{662E1328-F6A5-4B92-BC14-9083D0F28A33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8D30B183-3E6F-47AB-B66A-AFCDCE2F685D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D30B183-3E6F-47AB-B66A-AFCDCE2F685D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D30B183-3E6F-47AB-B66A-AFCDCE2F685D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662E1328-F6A5-4B92-BC14-9083D0F28A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662E1328-F6A5-4B92-BC14-9083D0F28A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662E1328-F6A5-4B92-BC14-9083D0F28A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662E1328-F6A5-4B92-BC14-9083D0F28A33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
