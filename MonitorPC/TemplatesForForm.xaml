@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:libPc="clr-namespace:LibMonitorPC;assembly=LibMonitorPC"                   
+                    xmlns:local="clr-namespace:MonitorPC">
+    <DataTemplate x:Key="StackPanelForCPU" DataType="{x:Type libPc:CPUInfo}">
+        <StackPanel Orientation="Horizontal" Background="LightGray">
+            <TextBlock Text="Процессор:" />
+            <TextBox Text="{Binding Path=Name, Mode=OneWay}" IsReadOnly="True" />
+            <TextBlock Text="кол. ядер. = "/>
+            <TextBox Text="{Binding Path=NumberOfCores, Mode=OneWay}" IsReadOnly="True" />
+            <TextBlock Text="кол. лог. = "/>
+            <TextBox Text="{Binding Path=NumberOfLogicalProcessors, Mode=OneWay}" IsReadOnly="True" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,11 @@ namespace LibMonitorPC
     /// <summary>
     /// Данные о процессоре
     /// </summary>
-    public class CPUInfo : BaseInfo
+    public class CPUInfo : INotifyPropertyChanged
     {
-        #region DeviceID
+        private QueryHelper _queryHelper;
+
+        #region DeviceID        
         private string _deviceID;
         /// <summary>
         /// Идентификатор процессора
@@ -21,12 +24,8 @@ namespace LibMonitorPC
             get { return _deviceID; }
             private set
             {
-                string newValue = value;
-                if(_deviceID != newValue)
-                {
-                    _deviceID = newValue;
-                    NotifyChanged("DeviceID");
-                }
+                _deviceID = value;
+                NotifyChanged("DeviceID");
             }
         }
         #endregion
@@ -41,12 +40,8 @@ namespace LibMonitorPC
             get { return _numberOfCores; }
             private set
             {
-                int newValue = value;
-                if (_numberOfCores != newValue)
-                {
-                    _numberOfCores = newValue;
-                    NotifyChanged("NumberOfCores");
-                }
+                _numberOfCores = value;
+                NotifyChanged("NumberOfCores");
             }
         }
         #endregion
@@ -61,12 +56,8 @@ namespace LibMonitorPC
             get { return _numberOfLogicalProcessors; }
             private set
             {
-                int newValue = value;
-                if (_numberOfLogicalProcessors != newValue)
-                {
-                    _numberOfLogicalProcessors = newValue;
-                    NotifyChanged("NumberOfLogicalProcessors");
-                }
+                _numberOfLogicalProcessors = value;
+                NotifyChanged("NumberOfLogicalProcessors");
             }
         }
         #endregion
@@ -81,12 +72,8 @@ namespace LibMonitorPC
             get { return _name; }
             private set
             {
-                string newValue = value;
-                if (_name != newValue)
-                {
-                    _name = newValue;
-                    NotifyChanged("Name");
-                }
+                _name = value.Trim();
+                NotifyChanged("Name");
             }
         }
         #endregion
@@ -95,27 +82,39 @@ namespace LibMonitorPC
         /// <summary>
         /// Получение информации о процессоре
         /// </summary>
-        public void GetProcessorInfo(string deviceID = null)
+        public void GetProcessorInfo()
         {
-            ExecuteQuery();
-            if (string.IsNullOrWhiteSpace(deviceID))
-            {
-                NumberOfCores = GetValueFirst<int>("NumberOfCores");
-                NumberOfLogicalProcessors = GetValueFirst<int>("NumberOfLogicalProcessors");
-                Name = GetValueFirst<string>("Name");
-                DeviceID = GetValueFirst<string>("DeviceID");
-            }
+            _queryHelper.ExecuteQuery();
+            var values = _queryHelper.GetValuesFirst(GlColumn.CPU_NumberOfCores, GlColumn.CPU_NumberOfLogicalProcessors, GlColumn.CPU_Name);
+            NumberOfCores = (int)Convert.ChangeType(values[GlColumn.CPU_NumberOfCores], typeof(int));
+            NumberOfLogicalProcessors = (int)Convert.ChangeType(values[GlColumn.CPU_NumberOfLogicalProcessors], typeof(int));
+            Name = (string)Convert.ChangeType(values[GlColumn.CPU_Name], typeof(string));            
         }
         #endregion
 
         #region конструктор класса
-        public CPUInfo() : base("root\\CIMV2", "SELECT * FROM Win32_Processor")
+        public CPUInfo(string deviceID) 
         {
-            this._numberOfCores = 0;
-            this._numberOfLogicalProcessors = 0;
-            this._name = string.Empty;
-            this._deviceID = string.Empty;
+            _queryHelper = new QueryHelper();
+            _queryHelper.SetScope(GlScope.RootCIMV2);
+            _queryHelper.SetQuery(string.Format(GlQuery.GetProcessorInfo, deviceID));
+            _numberOfCores = 0;
+            _numberOfLogicalProcessors = 0;
+            _name = string.Empty;
+            _deviceID = deviceID;
         }
-        #endregion        
+        #endregion
+
+        #region реализация интерфейса INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void NotifyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        #endregion
     }
 }

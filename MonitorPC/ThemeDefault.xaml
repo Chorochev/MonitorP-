@@ -13,5 +13,12 @@
     </Style>
     <Style TargetType="{x:Type StackPanel}">
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    <Style TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    <Style TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="LightGray"/>
     </Style>
 </ResourceDictionary>

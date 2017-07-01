@@ -4,35 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonitorPC"
+        xmlns:libPc="clr-namespace:LibMonitorPC;assembly=LibMonitorPC"
         mc:Ignorable="d"
         Title="MonitorPC" Height="350" Width="525">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ThemeDefault.xaml" />
+                <ResourceDictionary Source="TemplatesForForm.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary>       
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>            
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="55" />
             <RowDefinition Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Процессор:" />
-                <TextBox Text="{Binding Path=CPUInfo.Name, Mode=OneWay}" IsReadOnly="True" />
-                <TextBlock Text="кол. ядер. = "/>
-                <TextBox Text="{Binding Path=CPUInfo.NumberOfCores, Mode=OneWay}" IsReadOnly="True" />
-                <TextBlock Text="кол. лог. = "/>
-                <TextBox Text="{Binding Path=CPUInfo.NumberOfLogicalProcessors, Mode=OneWay}" IsReadOnly="True" />
-            </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" IsEnabled="False" Background="LightGray">
+            <ListBox ItemsSource="{Binding Path=ListCPU}" ItemTemplate="{DynamicResource StackPanelForCPU}" />
         </StackPanel>
-        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}" />
+        
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=Logs.JournalVisible}" IsEnabled="False" />
     </Grid>
 </Window>

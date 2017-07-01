@@ -33,9 +33,15 @@ namespace MonitorPC
         {
             bindingDataForm = new BindingDataForm();
             DataContext = bindingDataForm;
+            bindingDataForm.Logs.AddLog("Load data...");
             Task.Run(() =>
             {
-                bindingDataForm.CPUInfo.GetProcessorInfo();
+                bindingDataForm.LoadData();
+                //foreach (var item in bindingDataForm.ListCPU)
+                //{
+                //    //item.GetProcessorInfo();
+                //}                
+                bindingDataForm.Logs.AddLog("Load data is complete.");
             });
 
 
